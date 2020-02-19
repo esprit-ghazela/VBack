@@ -1,0 +1,43 @@
+g_produit_homepage:
+    path:     /
+    defaults: { _controller: GProduitBundle:Default:index }
+
+ajouter_produit:
+    path:     /ajouter_produit
+    defaults: { _controller: GProduitBundle:Produit:ajouter }
+
+modifier_produit:
+    path:     /modifier_produit/{id}
+    defaults: { _controller: GProduitBundle:Produit:modifier }
+
+supprimer_produit:
+    path:     /supprimer_produit/{id}
+    defaults: { _controller: GProduitBundle:Produit:supprimer }
+
+ajouter_categorie:
+    path:     /ajouter_categorie
+    defaults: { _controller: GProduitBundle:Categorie:ajouter }
+
+modifier_categorie:
+    path:     /modifier_categorie/{id}
+    defaults: { _controller: GProduitBundle:Categorie:modifier }
+
+supprimer_categorie:
+    path:     /supprimer_categorie/{id}
+    defaults: { _controller: GProduitBundle:Categorie:supprimer }
+
+filtre_produit:
+    path:     /filter_produit/{filtre}
+    defaults: { _controller: GProduitBundle:Produit:filter_produit }
+
+filtre_marque_produit:
+    path:     /filtre_marque_produit/{marque}
+    defaults: { _controller: GProduitBundle:Produit:filtre_marque_produit }
+
+trier_prix_croissant:
+    path:     /trier_prix_croissant
+    defaults: { _controller: GProduitBundle:Produit:trier_prix_croissant }
+
+trier_prix_decroissant:
+    path:     /trier_prix_decroissant
+    defaults: { _controller: GProduitBundle:Produit:trier_prix_decroissant }
