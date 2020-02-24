@@ -2,15 +2,15 @@
 
 namespace GProduitBundle\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-
-
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProduitType extends AbstractType
 {
@@ -19,9 +19,12 @@ class ProduitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('nom')
+        $builder->add('nom')
             ->add('description')
+            ->add('prix')
+            ->add('quantite')
+            ->add('reference')
+            ->add('partenaire')
             ->add('categorie',EntityType::class,array('class'=>'GProduitBundle:Categorie',
                 'choice_label'=>'nom',
                 'multiple'=>false,))
@@ -39,12 +42,10 @@ class ProduitType extends AbstractType
                     'Giant ' => 'Giant ',
                     'Kestrel' => 'Kestrel',
                 ] ])
-            ->add('image', FileType::class, array('label' => 'Image(JPG)'))
-            ->add('reference')
-            ->add('prix')
-            ->add('quantite')
+            ->add('image', FileType::class, array('label' => 'Image(JPG)',
+                'data_class' => null
+            ))
             ->add('Valider',SubmitType::class)
-
         ;
     }/**
      * {@inheritdoc}

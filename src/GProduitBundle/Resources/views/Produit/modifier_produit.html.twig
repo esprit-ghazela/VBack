@@ -33,7 +33,77 @@
 
 
                         <div class="card" ></br>
-                            {{ form (form) }}
+                            <form name="gproduitbundle_produit" method="post" enctype="multipart/form-data">
+                                <div id="gproduitbundle_produit">
+                                    <label  for="gproduitbundle_produit_nom" class="required">Nom</label>
+
+                                    <div class="input-group">
+                  <input placeholder="Nom" class="form-control" placeholder="Nom" type="text" id="gproduitbundle_produit_nom" name="gproduitbundle_produit[nom]" required="required" value="Nom">
+                                        <span class="md-line"></span>
+                                    </div>
+
+ <label for="gproduitbundle_produit_description" class="required">Description</label>
+                                    <div class="input-group">
+               <input placeholder="Description" class="form-control" type="text" id="gproduitbundle_produit_description" name="gproduitbundle_produit[description]" required="required" value="description">
+                                        <span class="md-line"></span>
+                                    </div>
+
+       <label for="gproduitbundle_produit_categorie" class="required">Catégorie</label>
+                                    <div class="input-group">
+ {{ form_widget(form.categorie, { 'attr': {'class': 'form-control'} }) }}
+              <span class="md-line"></span>
+          </select>
+                                    </div>
+
+                                    <label for="gproduitbundle_produit_marque" class="required">Marque</label>
+                                    <div class="input-group">
+             <select class="form-control" id="gproduitbundle_produit_marque" name="gproduitbundle_produit[marque]">
+          <option value="Atala" selected="selected">Atala</option>
+                 <option value="Atom Bicycles">Atom Bicycles</option>
+                 <option value="BH Bikes">BH Bikes</option>
+                 <option value="Bianchi ">Bianchi </option>
+                 <option value="Bike by Me ">Bike by Me</option>
+                 <option value="BMC">BMC</option>
+                 <option value="BTwin">BTwin</option>
+                 <option value="Cannondale Bicycles">Cannondale Bicycles</option>
+                 <option value="Canyon">Canyon </option>
+                 <option value="Giant ">Giant </option>
+                 <option value="Kestrel">Kestrel</option>
+             </select>
+                                        <span class="md-line"></span>
+       </div>
+
+     <label for="gproduitbundle_produit_image" class="required">Image</label>
+        <div class="input-group">
+      <input class="form-control"  type="file" id="gproduitbundle_produit_image" name="gproduitbundle_produit[image]" required="required" value="{{ asset('front_template/img/category/'~ form_widget(form.image) ) }}">
+            <span class="md-line"></span>
+        </div>
+                                    <label for="gproduitbundle_produit_reference" class="required">Réference</label>
+       <div class="input-group">
+        <input placeholder="Réference" class="form-control" type="text" id="gproduitbundle_produit_reference" name="gproduitbundle_produit[reference]" required="required" value="#28fs5">
+           <span class="md-line"></span>
+       </div>
+
+       <label for="gproduitbundle_produit_prix" class="required">Prix</label>
+<div class="input-group">
+    <input placeholder="Prix" class="form-control" type="text" id="gproduitbundle_produit_prix" name="gproduitbundle_produit[prix]" required="required" value="254">
+    <span class="md-line"></span>
+</div>
+
+     <label for="gproduitbundle_produit_quantite" class="required">Quantite</label>
+  <div class="input-group">
+    <input placeholder="Quantiter" class="form-control" type="number" id="gproduitbundle_produit_quantite" name="gproduitbundle_produit[quantite]" required="required" value="23">
+    <span class="md-line"></span>
+</div>
+                                    <input hidden="hidden" type="number" value="{{ app.user.id }}" id="gproduitbundle_produit_partenaire" name="gproduitbundle_produit[partenaire]" required="required">
+
+
+                                    <div>
+      <button type="submit" id="gproduitbundle_produit_Valider" name="gproduitbundle_produit[Valider]" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" >Modifier</button>
+  </div>
+<input type="hidden" id="gproduitbundle_produit__token" name="gproduitbundle_produit[_token]" value="u_F2rTZo0vke90AdG2E4XsrydR1n_DBgJ95rAA0Q1kA">
+                                </div>
+                            </form>
                         </div>
 
                         <div id="styleSelector">

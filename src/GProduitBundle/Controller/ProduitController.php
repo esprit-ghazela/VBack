@@ -7,6 +7,10 @@ use GProduitBundle\Form\ProduitType;
 use GProduitBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class ProduitController extends Controller
 {
@@ -19,17 +23,15 @@ class ProduitController extends Controller
             $em=$this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush();
-            return $this->redirectToRoute("gestion_stock") ;
+            return $this->redirectToRoute("ajouter_produit") ;
         }
         return $this->render("@GProduit/Produit/ajouter_produit.html.twig",array(
             'form'=>$form->createView()
         ));
     }
-    public function afficherAction(Request $request){
-
-
+    public function afficherAction(Request $request,$user_id){
         $em = $this->getDoctrine()->getManager();
-        $produits=$em->getRepository('GProduitBundle:Produit')->findAll();
+        $produits=$em->getRepository('GProduitBundle:Produit')->findbyUser($user_id);
 
         return $this->render('@VBack/Template/gestion_stock.html.twig',array(
             'produits'=>$produits
@@ -52,7 +54,7 @@ class ProduitController extends Controller
         if ($form->isSubmitted()){
             $em->persist($produits);
             $em->flush();
-            return $this->redirectToRoute("gestion_stock") ;
+            return $this->redirectToRoute("accuil") ;
         }
         return $this->render("@GProduit/Produit/modifier_produit.html.twig",array(
             'form'=>$form->createView()
@@ -65,7 +67,7 @@ class ProduitController extends Controller
         $produits = $em->getRepository("GProduitBundle:Produit")->find($id);
         $em->remove($produits);
         $em->flush();
-        return $this->redirectToRoute("gestion_stock");
+        return $this->redirectToRoute("accuil");
     }
 
     public function detailAction(Request $request,$id)
@@ -79,8 +81,10 @@ class ProduitController extends Controller
         if ($session->has('panier'))
         {
             $panier = $session->get('panier');
+            $articles = count($session->get('panier'));
         }else{
             $panier = false;
+            $articles = 0;
         }
 
         $articles = count($session->get('panier'));
@@ -108,7 +112,7 @@ class ProduitController extends Controller
             $articles = 0;
         }
         $produits  = $this->get('knp_paginator')
-            ->paginate($findProduits,$request->query->get('page', 1),1);
+            ->paginate($findProduits,$request->query->get('page', 1),5);
 
         return $this->render('@VFront/FrontTemplate/category.html.twig',array(
             'produits'=>$produits,'panier'=>$panier,'filtre_categorie'=>$categorie,'articles' => $articles
@@ -133,7 +137,7 @@ class ProduitController extends Controller
         }
 
         $produits  = $this->get('knp_paginator')
-            ->paginate($findProduits,$request->query->get('page', 1),1);
+            ->paginate($findProduits,$request->query->get('page', 1),5);
 
         return $this->render('@VFront/FrontTemplate/category.html.twig',array(
             'produits'=>$produits,'panier'=>$panier,'filtre_categorie'=>$categorie,'articles' => $articles
@@ -157,7 +161,7 @@ class ProduitController extends Controller
             $articles = 0;
         }
         $produits  = $this->get('knp_paginator')
-            ->paginate($findProduits,$request->query->get('page', 1),1);
+            ->paginate($findProduits,$request->query->get('page', 1),5);
 
         return $this->render('@VFront/FrontTemplate/category.html.twig',array(
             'produits'=>$produits,'panier'=>$panier,'filtre_categorie'=>$categorie,'articles' => $articles
@@ -182,12 +186,59 @@ class ProduitController extends Controller
         }
 
         $produits  = $this->get('knp_paginator')
-            ->paginate($findProduits,$request->query->get('page', 1),1);
+            ->paginate($findProduits,$request->query->get('page', 1),5);
 
         return $this->render('@VFront/FrontTemplate/category.html.twig',array(
             'produits'=>$produits,'panier'=>$panier,'filtre_categorie'=>$categorie,'articles' => $articles
         ));
     }
+
+    public function detail_produitAction(Request $request,$id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $produit=$em->getRepository('GProduitBundle:Produit')->find($id);
+
+        if (!$produit) throw $this->createNotFoundException('La page n\'existe pas.');
+
+
+        return $this->render('@GProduit/Produit/detail.html.twig',array(
+            'produit'=>$produit
+        ));
+    }
+
+
+    public function rechercheProduitAction(Request $request)
+    {
+        //var_dump($request->getRequestFormat());
+        $produit = new Produit();
+        $em = $this->getDoctrine()->getManager();
+        $produit = $em->getRepository("GProduitBundle:Produit")->findAll();
+
+
+            $serializer = new Serializer(array(new ObjectNormalizer()));
+            $produit = $em->getRepository("GProduitBundle:Produit")
+                ->RechercheNom($request->get('nom'));
+            $data = $serializer->normalize($produit);
+            return new JsonResponse($data);
+
+
+    }
+
+    public function rechercheAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $nom = $em->getRepository("GProduitBundle:Produit")->findAll();
+        if ($request->isMethod('POST')) {
+            $nom = $request->get('nom');
+            $produit = $em->getRepository("GProduitBundle:Produit")->findBy(array("nom" => $nom));
+        }
+        else {
+            $formation = $this->getDoctrine()->getRepository(Produit::class)
+                ->findAll();
+        }
+        return $this->render("@VBack/Produit/category.html.twig", array('formations' => $formations));
+    }
+
 
 
 

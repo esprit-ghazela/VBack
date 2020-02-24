@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block titre %}Detail du produit {% endblock %}
+{% block style %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset ('assets/css/detailstyle.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="pcoded-content">
+    <div class="pcoded-inner-content">
+    <div class="main-body">
+    <div class="page-wrapper">
+
+    <div class="page-body">
+
+
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+
+                    <div class="preview-pic tab-content">
+                        <div class="tab-pane active"><img  style="width: 500px;
+    height: 350px;" src="{{ asset('front_template/img/category/' ~ produit.image) }}" /></div>
+                    </div>
+
+                </div>
+                <div class="details col-md-6">
+                    <h5 class="product-title">{{ produit.nom }}</h5>
+                    <div class="rating">
+                        <span class="review-no"><strong> Identifiant : </strong> </span>
+                        <span> {{ produit.id }} </span><br>
+                        <span class="review-no"><strong> Réference : </strong>  </span>
+                        <span> {{ produit.reference }} </span>
+
+                    </div>
+                    <p class="product-description">{{ produit.description }}.</p>
+                    <h4 class="price">prix : <span>{{ produit.prix }} DT</span></h4>
+                    <div class="rating">
+                        <span class="review-no"><strong> Categorie : </strong> </span>
+                        <span> {{ produit.categorie.nom }} </span><br>
+                        <span class="review-no"><strong> Marque : </strong> </span>
+                        <span> {{ produit.marque }} </span><br>
+                        <span class="review-no"><strong> Quantiter Disponible : </strong>  </span>
+                        <span> {{ produit.quantite }} </span>
+                    </div>
+                    <div class="action">
+                        &emsp;&emsp;
+                        <a href="{{ path("supprimer_produit",{'id':produit.id}) }}" >
+                            <button class="like btn btn-default" type="button"><span class="fa fa-trash-o" aria-hidden="true"></span></button></a>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <a href="{{ path("modifier_produit",{'id':produit.id}) }}" >
+                        <button class="like btn btn-default" type="button"><span class="fa fa-pencil" aria-hidden="true"></span></button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div></div></div></div></div>
+{% endblock %}

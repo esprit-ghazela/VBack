@@ -42,6 +42,32 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('marque',$marque) ;
         return $Query->getResult() ;
     }
+    public function ModifybyUser($user_id,$id)
+    {
+        $Query=$this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+             FROM GProduitBundle:Produit p 
+             WHERE p.partenaire= :user_id AND p.id= :id
+             ')
+            ->setParameter('user_id',$user_id)
+            ->setParameter('id',$id) ;
+        return $Query->getResult() ;
+    }
+
+
+
+    public function findbyUser($user_id)
+    {
+        $Query=$this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+             FROM GProduitBundle:Produit p 
+             WHERE p.partenaire= :user_id 
+             ')
+            ->setParameter('user_id',$user_id) ;
+        return $Query->getResult() ;
+    }
 
     public function PrixOrdreCroissant()
     {
@@ -64,6 +90,31 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
              ');
         return $Query->getResult() ;
     }
+
+
+    public function RechercheNom($nom){
+
+        $query=$this->getEntityManager()
+            ->createQuery("Select a From GProduitBundle:Produit a
+                Where a.nom Like :nom ")
+            ->setParameter('nom','%'.$nom.'%');
+        return $query->getResult();
+    }
+
+    public function findByRolePart()
+    {
+        $role='ROLE_PART';
+        $query=$this->getEntityManager()
+            ->createQuery(
+                'SELECT u 
+                FROM UserBundle:User u 
+                WHERE u.roles LIKE :role'
+            )
+            ->setParameter('role', '%"ROLE_PART"%'
+            );
+        $users = $query->getResult();
+    }
+
 
 
 }

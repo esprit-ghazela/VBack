@@ -175,14 +175,22 @@
                         </div>
                     </div>
 
-                    <div>
-                        <div class="input-group filter-bar-search">
-                            <div>
-                            <input type="text" placeholder="Chercher" id="recherche">
-                            <div class="nom" id="nom"></div>
-                        </div>
+                    <div>   <form method="POST">
 
-                        </div>
+                        <div class="input-group filter-bar-search">
+
+
+                                <div class="input-group">
+                        <span class="input-group-append">
+                            <input type="text" name="titre">
+    <input type="submit" name="submit" value="recherche">
+
+
+              </span>
+                                </div>
+
+
+                        </div></form>
                     </div>
                 </div>
                 <!-- End Filter Bar -->
@@ -199,7 +207,6 @@
                                         {% if panier[produits.id] is not defined %}
                                         <li><a href="{{ path("ajouterpanier",{'id':produits.id}) }}" ><button><i class="ti-shopping-cart"></i></button></a></li>
                                         {% endif %}
-                                        <li><button><i class="ti-heart"></i></button></li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
@@ -371,4 +378,67 @@
     </div>
 </footer>
 <!--================ End footer Area  =================-->
+    <script src="{{ asset("jquery.js") }}"></script>
+    <script>
+        $("#searchbar").keyup(
+            function () {
+                var   nom=$('#searchbar').val();
+
+                var DATA ='nom='+nom;
+                var i=0;
+                $.ajax({
+
+                    type:"GET",
+                    url:"{{ path('recherche_produit') }}",
+                    data: DATA,
+                    success: function (data) {
+                        console.log("data**");
+                        console.log(data);
+                        //language=HTML
+
+                        $.each(data,function (k, el) {
+                                $("#aff").hide();
+                                $("#res").append(
+                                    $("#div").html( "<tr>"+
+                                        "<td>"+
+                                        el.nom+
+                                        "</td>"+
+                                        "<td>"+
+                                        el.categorie+
+                                        "</td>"+
+                                        "<td>"+
+                                        el.prix+
+                                        "</td>"+
+                                        "<td>"+
+                                        el.description+
+                                        "</td>"+
+                                        "<td>"+
+                                        el.marque+
+                                        "</td>"+
+                                        "<td>"+
+                                        "</td>"+
+                                        "<td>"+
+                                        "</td>"+
+
+
+                                        "</tr>"
+
+                                    )
+
+                                );
+                            }
+
+
+                        );
+                    },
+                    error:function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });            }
+        );
+
+
+    </script>
+
 {% endblock %}

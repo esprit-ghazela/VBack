@@ -1,0 +1,89 @@
+{% extends 'front_base.html.twig' %}
+<div class="sidebar-search">
+
+    <div class="input-group custom-search-form">
+
+        <input type="text" id="search" class="form-control" placeholder="Search here">
+    </div>
+    <!-- /input-group -->
+</div>
+<ul class="nav" id="side-menu">
+    <li>
+        <a href="#"> Entities<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level" id="entitiesNav">
+        </ul>
+    </li>
+</ul><br><br><br><br>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 1;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_search') }}",
+                    data: {
+                        'q' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        if (value===$(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id, value) {
+                                    if (key === 'posts') {
+                                        if (id !== 'error') {
+                                            console.log(value[1]);
+                                            entitySelector.append('<li><b>'+value[1]+'</b><a href="/detail/'+id+'">'+'<img src="/uploads/post/'+value[0]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
+                                        } else {
+                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<div class="row">
+    {% for produits in produits %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card text-center card-product">
+                <div class="card-product__img">
+                    <img class="card-img" src="{{ asset('front_template/img/category/' ~ produits.image) }}" style="height: 260px;width: 270px" alt="">
+                    <ul class="card-product__imgOverlay">
+                        <li><a href="{{ path("detail",{'id':produits.id}) }}" ><button><i class="ti-search"></i></button></a></li>
+                        {% if panier[produits.id] is not defined %}
+                            <li><a href="{{ path("ajouterpanier",{'id':produits.id}) }}" ><button><i class="ti-shopping-cart"></i></button></a></li>
+                        {% endif %}
+                        <li><button><i class="ti-heart"></i></button></li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <p>{{ produits.categorie.nom }}</p>
+                    <h4 class="card-product__title"><a href="#">{{ produits.nom }}</a></h4>
+                    <p class="card-product__price">{{ produits.prix }} DT</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+
+
+</div>

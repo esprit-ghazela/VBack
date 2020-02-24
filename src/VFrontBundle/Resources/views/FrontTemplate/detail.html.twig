@@ -53,7 +53,7 @@
                         </ul>
                         <p>{{ produit.description }}</p>
 
-                        {% if panier[produit.id] is not defined %}  <label>Quantite:</label>
+                         <label>Quantite:</label>
                         <form action="{{ path("ajouterpanier",{'id':produit.id}) }}" method="get">
                             <select name="quantite" class="span4">
                             {% for i in 1..(produit.quantite) %}
@@ -65,27 +65,29 @@
                                 <div class="social">
 
 
-                                        <button class="button share_facebook" onclick="" style=" background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
+                                        <button href="{{ twitterButton() }}" style=" background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
                                         <i class="fa fa-lg fa-facebook"></i>
                                         </button>
 
-                                        <button class="button share_twitter" data-url="http://...." style=" background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
+                                        <button class="button share_twitter" data-url="https://www.youtube.com/" style=" background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
                                             <i class="fa fa-lg fa-twitter"></i>
                                         </button >
 
-                                        <button class="button share_gplus" data-url="http://...." style=" background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
+                                        <button class="button share_gplus" data-url="https://www.youtube.com/" style=" background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
                                        <a href="#"><i class="fa fa-lg fa-google-plus"></i></a>
                                         </button>
 
 
                                 </div>
                             </div><br><br>
+                            {% if panier[produit.id] is not defined %}
 
                             <div>
                                 <button class="button primary-btn">Ajouter au panier</button><br><br><br>
                             </div>
                         </form>
                             {% else %}
+
 
                                 <div>
                                     <a href="{{ path ('panier') }}" class="button primary-btn">Ce produit existe déja dans votre panier</a>

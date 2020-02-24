@@ -41,3 +41,11 @@ trier_prix_croissant:
 trier_prix_decroissant:
     path:     /trier_prix_decroissant
     defaults: { _controller: GProduitBundle:Produit:trier_prix_decroissant }
+
+detail_produit:
+    path:     /detail_produit/{id}
+    defaults: { _controller: GProduitBundle:Produit:detail_produit }
+
+recherche_produit:
+  path:     /recherche_produit
+  defaults: { _controller: GProduitBundle:Produit:rechercheProduit }
