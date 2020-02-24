@@ -1,11 +1,72 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<h1>Inscription</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="signup-card card-block auth-body mr-auto ml-auto">
+                <div class="auth-box">
+<form lass="md-float-material" name="fos_user_registration_form" method="post" action="/v/VBack/web/app_dev.php/register/" class="fos_user_registration_register">
+    <div id="fos_user_registration_form">
+        <div class="text-center">
+            <img src="{{ asset ('assets/images/logoo.png') }}" height="80" alt="logo.png" alt="logo.png">
+        </div>
+        <div class="row m-b-20">
+            <div class="col-md-12">
+                <h3 class="text-center txt-primary">Inscription</h3>
+            </div>
+        </div>
+        <hr/>
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
+        <div class="input-group">
+            <label for="fos_user_registration_form_nom" class="required"></label>
+            <input class="form-control" placeholder="Nom"type="text" id="fos_user_registration_form_nom" name="fos_user_registration_form[nom]" required="required">
+            <span class="md-line"></span>
+        </div>
 
-<div>
-    <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
-</div>
-{{ form_end(form) }}
+        <div class="input-group">
+            <label for="fos_user_registration_form_prenom" class="required"></label>
+            <input class="form-control" placeholder="Prenom"type="text" id="fos_user_registration_form_prenom" name="fos_user_registration_form[prenom]" required="required">
+            <span class="md-line"></span>
+        </div>
+
+        <div>
+            <label for="fos_user_registration_form_roles" class="required">Type</label>
+            <select id="fos_user_registration_form_roles" name="fos_user_registration_form[roles][]" required="required" multiple="multiple">
+                <option value="ROLE_ADMIN">Administrateur</option>
+                <option value="ROLE_PART">Partenaire</option>
+                <option value="ROLE_CLIENT">Client</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="fos_user_registration_form_email" class="required">Email</label>
+            <input type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required">
+        </div>
+
+        <div>
+            <label for="fos_user_registration_form_username" class="required">Username</label>
+            <input type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="180" pattern=".{2,}">
+        </div>
+
+        <div>
+            <label for="fos_user_registration_form_plainPassword_first" class="required">Password</label>
+            <input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" autocomplete="new-password">
+        </div>
+
+        <div>
+            <label for="fos_user_registration_form_plainPassword_second" class="required">Repeat password</label>
+            <input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" autocomplete="new-password">
+        </div>
+
+        <input type="hidden" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="_BdGcF6ZPvgbsXo8ydO2TfbigSkj5BIyTxA4dTm_djM">
+    </div>
+
+    <div>
+        <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
+    </div>
+
+</form>
+
+
+                </div>/</div></div></div></div> </div></div></div></div>
+
