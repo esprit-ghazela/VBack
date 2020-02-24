@@ -1,3 +1,6 @@
 user_homepage:
     path:     /user_homepage
     defaults: { _controller: UserBundle:Default:index }
+inscription_partenaire:
+    path:     /inscription_partenaire
+    defaults: { _controller: UserBundle:Partenaire:inscription }

@@ -20,6 +20,13 @@ class PartenaireController extends Controller
         ));
     }
 
+    public function inscriptionAction(Request $request)
+    {
+        return $this->render('@User/Partenaire/register_partenaire.html.twig');
+    }
+
+
+
 
 
 
