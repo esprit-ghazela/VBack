@@ -1,6 +1,6 @@
 <?php
 
-namespace GProduitBundle\Repository;
+namespace UserBundle\Repository;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -21,6 +21,19 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
                 WHERE u.roles LIKE :role'
             )
             ->setParameter('role', '%"ROLE_PART"%'
+            );
+        return $query->getResult();
+    }
+
+    public function RoleAdmin()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery(
+                'SELECT u 
+                FROM UserBundle:User u 
+                WHERE u.roles LIKE :role'
+            )
+            ->setParameter('role', '%"ROLE_ADMIN"%'
             );
         return $query->getResult();
     }
