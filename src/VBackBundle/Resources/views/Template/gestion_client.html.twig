@@ -13,7 +13,9 @@
                                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                     &emsp;&emsp;&emsp;
                                     <span>
-                                              <button  class="btn btn-success" onClick="javascript:popUp('')"><i class="icofont icofont-plus"></i>Ajouter</button>
+                                              <button  class="btn btn-success" >
+                                                   <a href="{{ path('fos_user_registration_register') }}">
+                                                       <i class="icofont icofont-plus"></i>Ajouter</a></button>
                                             </span>
 
 
@@ -55,19 +57,22 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>ID</th>
                                             <th>Nom</th>
                                             <th>Prénom</th>
-                                            <th>Identifiant</th>
+                                            <th>Nom d'utilisateur</th>
+                                            <th>E-Mail</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        {% for client in clients %}
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <th scope="row">{{ client.id }}</th>
+                                            <td>{{ client.nom }}</td>
+                                            <td>{{ client.prenom }}</td>
+                                            <td>{{ client.username }}</td>
+                                            <td>{{ client.email }}</td>
                                             <td>
                                                 <a href="#" onClick="javascript:popUp('')"><i class="fa fa-edit" style="font-size:18px"></i></i></a>
                                                 <a href="#" onClick="javascript:popUp('')"><i class="fa fa-eye" style="font-size:18px"></i></i></a>
@@ -76,7 +81,7 @@
                                             </td>
                                         </tr>
 
-
+{% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
