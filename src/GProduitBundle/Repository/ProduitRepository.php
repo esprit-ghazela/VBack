@@ -101,19 +101,7 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
-    public function findByRolePart()
-    {
-        $role='ROLE_PART';
-        $query=$this->getEntityManager()
-            ->createQuery(
-                'SELECT u 
-                FROM UserBundle:User u 
-                WHERE u.roles LIKE :role'
-            )
-            ->setParameter('role', '%"ROLE_PART"%'
-            );
-        $users = $query->getResult();
-    }
+
 
 
 

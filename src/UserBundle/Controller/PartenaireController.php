@@ -12,7 +12,8 @@ class PartenaireController extends Controller
     public function afficherAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $partenaires=$em->getRepository('GProduitBundle:Produit')->findByRolePart();
+        $role='ROLE_PART';
+        $partenaires=$em->getRepository('UserBundle:User')->RolePart($role);
 
         return $this->render('@VBack/Template/gestion_partenaire.html.twig',array(
             'partenaires'=>$partenaires
