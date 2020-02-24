@@ -15,7 +15,7 @@ gestion_partenaire:
     defaults: { _controller: UserBundle:Partenaire:afficher }
 gestion_administrateur:
     path:     /gestion_administrateur
-    defaults: { _controller: VBackBundle:Default:gestion_administrateur }
+    defaults: { _controller: UserBundle:Admin:afficher }
 gestion_annonce:
     path:     /gestion_annonce
     defaults: { _controller: VBackBundle:Default:gestion_annonce }
