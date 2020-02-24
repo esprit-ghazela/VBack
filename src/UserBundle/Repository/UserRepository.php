@@ -37,4 +37,17 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             );
         return $query->getResult();
     }
+
+    public function RoleClient()
+    {
+        $query=$this->getEntityManager()
+            ->createQuery(
+                'SELECT u 
+                FROM UserBundle:User u 
+                WHERE u.roles LIKE :role'
+            )
+            ->setParameter('role', '%"ROLE_CLIENT"%'
+            );
+        return $query->getResult();
+    }
 }

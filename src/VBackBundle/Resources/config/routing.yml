@@ -9,7 +9,7 @@ accuil:
     defaults: { _controller: VBackBundle:Default:accuil }
 gestion_client:
     path:     /gestion_client
-    defaults: { _controller: VBackBundle:Default:gestion_client }
+    defaults: { _controller: UserBundle:Client:afficher }
 gestion_partenaire:
     path:     /gestion_partenaire
     defaults: { _controller: UserBundle:Partenaire:afficher }
