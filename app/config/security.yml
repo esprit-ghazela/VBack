@@ -25,7 +25,7 @@ security:
 
             logout:
                 path:   /logout
-                target: /
+                target: /login
                 invalidate_session: false
                 delete_cookies:
                     a: { path: null, domain: null }
