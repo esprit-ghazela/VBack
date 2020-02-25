@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vélo</title>
     {% block css %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
     <link rel="stylesheet" href="{{ asset('front_template/vendors/bootstrap/bootstrap.min.css') }}">
     <link rel="icon" href="{{ asset ('front_template/assets/images/favicon.ico') }} "  type="image/png">
     <link rel="stylesheet" href="{{ asset('front_template/vendors/bootstrap/bootstrap.min.css')}}">
@@ -176,7 +177,8 @@
 <!--================ End footer Area  =================-->
 
 
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
 <script src="{{ asset('front_template/vendors/jquery/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('front_template/vendors/bootstrap/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('front_template/vendors/skrollr.min.js') }}"></script>

@@ -41,6 +41,7 @@
                 <div class="col-lg-5 offset-lg-1">
 
                     <div class="s_product_text">
+                        {{ produit.rating }}
                         <h3>{{ produit.nom }}</h3>
                         <h2>{{ produit.prix }}</h2>
                         <ul class="list">
@@ -62,10 +63,12 @@
                             </select><br><br>
 
                             <div class="row">
+
+
                                 <div class="social">
 
 
-                                        <button href="{{ twitterButton() }}" style=" background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
+                                        <button href="" style=" background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;">
                                         <i class="fa fa-lg fa-facebook"></i>
                                         </button>
 

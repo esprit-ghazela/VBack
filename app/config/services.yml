@@ -29,7 +29,16 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
+    star_rating.type:
+        class: blackknight467\StarRatingBundle\Form\RatingType
+        tags:
+            - { name: form.type, alias: rating }
 
+        star_rating.twig:
+            class: blackknight467\StarRatingBundle\Extensions\StarRatingExtension
+            tags: [{ name: twig.extension }]
+            arguments:
+                - '@service_container'
 
 
     # default configuration for services in *this* file

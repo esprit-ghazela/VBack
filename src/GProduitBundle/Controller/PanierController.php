@@ -36,7 +36,7 @@ class PanierController extends Controller
             $produits = $em->getRepository("GProduitBundle:Produit")->findBy(array("nom" => $nom));
         }
         $produits  = $this->get('knp_paginator')
-            ->paginate($findProduits,$request->query->get('page', 1),3);
+            ->paginate($findProduits,$request->query->get('page', 1),1);
 
         return $this->render('@VFront/FrontTemplate/category.html.twig',array(
             'produits'=>$produits,'panier'=>$panier,'filtre_categorie'=>$categorie,'articles' => $articles

@@ -2,6 +2,7 @@
 
 namespace GProduitBundle\Form;
 
+use blackknight467\StarRatingBundle\Form\RatingType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProduitType extends AbstractType
 {
@@ -45,7 +45,9 @@ class ProduitType extends AbstractType
             ->add('image', FileType::class, array('label' => 'Image(JPG)',
                 'data_class' => null
             ))
+            ->add('review_rating', RatingType::class, ['stars' => 5])
             ->add('Valider',SubmitType::class)
+
         ;
     }/**
      * {@inheritdoc}
