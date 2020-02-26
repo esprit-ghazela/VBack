@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f92e3333cb2cffafcead3c417b566e34",
+    "content-hash": "7a67b49fd2b75f13644f6857c71a66d4",
     "packages": [
         {
             "name": "blackknight467/star-rating-bundle",
@@ -3003,6 +3003,68 @@
                 "framework"
             ],
             "time": "2020-01-21T12:30:09+00:00"
+        },
+        {
+            "name": "tchoulom/view-counter-bundle",
+            "version": "3.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tchoulom/ViewCounterBundle.git",
+                "reference": "91d688ff4d3743040ac588e1b0d67d217bddd9ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tchoulom/ViewCounterBundle/zipball/91d688ff4d3743040ac588e1b0d67d217bddd9ea",
+                "reference": "91d688ff4d3743040ac588e1b0d67d217bddd9ea",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/framework-bundle": "^2.7 || ^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">5.7"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Tchoulom\\ViewCounterBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ernest TCHOULOM",
+                    "email": "tchoulomernest@yahoo.fr",
+                    "homepage": "http://www.tchoulom.com"
+                }
+            ],
+            "description": "The \"View Counter\" bundle",
+            "keywords": [
+                "Count the number of views of a page",
+                "Google Charts",
+                "page view count",
+                "page views",
+                "pages views counter",
+                "statistics",
+                "statistics bundle",
+                "statistics of web pages",
+                "statistics symfony",
+                "view count",
+                "view counter",
+                "view counter bundle",
+                "view counter interface",
+                "view counter symfony",
+                "viewership",
+                "viewership measurement"
+            ],
+            "time": "2019-11-10T17:59:33+00:00"
         },
         {
             "name": "twig/twig",
