@@ -5,6 +5,7 @@ namespace GProduitBundle\Controller;
 
 
 use GProduitBundle\Entity\Categorie;
+use GProduitBundle\Entity\Notification;
 use GProduitBundle\Entity\Produit;
 use GProduitBundle\Form\CategorieType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,6 +31,21 @@ class CategorieController extends Controller
             $em=$this->getDoctrine()->getManager();
             $em->persist($categorie);
             $em->flush();
+
+
+            $notification = new Notification();
+            $notification
+                ->setTitle('Nouveau Produit')
+                ->setDescription($categorie->getNom())
+                ->setRoute('gestion_categorie')
+                ->setParameters(array('id' => $categorie->getId()))
+            ;
+            $em->persist($notification);
+            $em->flush();
+
+            $pusher=$this->get('mrad.pusher.notifications');
+            $pusher->trigger($notification) ;
+
             return $this->redirectToRoute("gestion_categorie") ;
         }
         return $this->render("@GProduit/Categorie/ajouter_categorie.html.twig",array(

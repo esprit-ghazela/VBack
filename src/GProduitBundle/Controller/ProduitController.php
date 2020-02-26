@@ -5,6 +5,7 @@ namespace GProduitBundle\Controller;
 
 use GProduitBundle\Form\ProduitType;
 use GProduitBundle\Entity\Produit;
+use GProduitBundle\Entity\Notifications ;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,6 +24,20 @@ class ProduitController extends Controller
             $em=$this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush();
+
+            $notification = new Notifications();
+            $notification
+                ->setTitle('Nouveau Produit')
+                ->setDescription($produit->getNom())
+                ->setRoute('gestion_stock')
+                ->setParameters(array('id' => $produit->getId()))
+            ;
+            $em->persist($notification);
+            $em->flush();
+
+            $pusher=$this->get('mrad.pusher.notifications');
+            $pusher->trigger($notification) ;
+
             return $this->redirectToRoute("ajouter_produit") ;
         }
         return $this->render("@GProduit/Produit/ajouter_produit.html.twig",array(
