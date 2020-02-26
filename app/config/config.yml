@@ -102,6 +102,13 @@ knp_paginator:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
+# NotificationsBundle configuration
+notifications:
+    app_id:     953172
+    app_key:    c0abe3929b28a68b38bd
+    app_secret: f6823a4af27f02b143ad
+    cluster:    eu
+
 #nomaya_social:
   #buttons:
       #  facebook:

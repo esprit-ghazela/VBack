@@ -106,36 +106,27 @@
                                     <h6>Notifications</h6>
                                     <label class="label label-danger">Nouveauté</label>
                                 </li>
-                                <li>
-                                    <div class="media">
-                                        <img class="d-flex align-self-center img-radius" src="{{ asset('assets/images/avatar-2.jpg') }}" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <h5 class="notification-user">John Doe</h5>
-                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                            <span class="notification-time">30 minutes ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <img class="d-flex align-self-center img-radius" src="{{ asset('assets/images/avatar-4.jpg') }}" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <h5 class="notification-user">Joseph William</h5>
-                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                            <span class="notification-time">30 minutes ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <img class="d-flex align-self-center img-radius" src="{{ asset('assets/images/avatar-3.jpg') }}" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <h5 class="notification-user">Sara Soudein</h5>
-                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                            <span class="notification-time">30 minutes ago</span>
-                                        </div>
-                                    </div>
-                                </li>
+                               <li>
+                                {# Call NotificationsBundles's assets #}
+                                {{ notifications_assets() }}
+                                <script>
+                                    /**
+                                     * After calling notifications_assets() "pusher" is now available
+                                     * and you can use it this way
+                                     */
+
+                                        // select the channel you want to listen to
+                                    var channel = pusher.subscribe("notifications");// notifications channel
+                                    channel.bind("my-event", function(data) {
+                                        console.log('from notifications channel', data);
+                                    });
+
+                                    var channel = pusher.subscribe("messages");// messages channel
+                                    channel.bind("my-event", function(data) {
+                                        console.log('from messages channel', data);
+                                    });
+                                </script>
+                               </li>
                             </ul>
                         </li>
 

@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new blackknight467\StarRatingBundle\StarRatingBundle(),
             new Mgilet\NotificationBundle\MgiletNotificationBundle(),
+            new SBC\NotificationsBundle\NotificationsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
