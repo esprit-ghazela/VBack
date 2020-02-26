@@ -17,9 +17,10 @@ class CategorieController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $categorie=$em->getRepository('GProduitBundle:Categorie')->findAll();
+        $notification=$this->getDoctrine()->getManager()->getRepository('GProduitBundle:Notification')->findAll() ;
 
         return $this->render('@VBack/Template/gestion_categorie.html.twig',array(
-            'categories'=>$categorie
+            'categories'=>$categorie,'notification' => $notification
         ));
     }
 
@@ -32,22 +33,9 @@ class CategorieController extends Controller
             $em->persist($categorie);
             $em->flush();
 
-
-            $notification = new Notification();
-            $notification
-                ->setTitle('Nouveau Produit')
-                ->setDescription($categorie->getNom())
-                ->setRoute('gestion_categorie')
-                ->setParameters(array('id' => $categorie->getId()))
-            ;
-            $em->persist($notification);
-            $em->flush();
-
-            $pusher=$this->get('mrad.pusher.notifications');
-            $pusher->trigger($notification) ;
-
             return $this->redirectToRoute("gestion_categorie") ;
         }
+
         return $this->render("@GProduit/Categorie/ajouter_categorie.html.twig",array(
             'form'=>$form->createView()
         ));
@@ -63,6 +51,8 @@ class CategorieController extends Controller
             $em->flush();
             return $this->redirectToRoute("gestion_categorie") ;
         }
+
+
         return $this->render("@GProduit/Categorie/modifier_categorie.html.twig",array(
             'form'=>$form->createView()
         ));

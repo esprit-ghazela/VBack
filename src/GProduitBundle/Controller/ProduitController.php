@@ -25,31 +25,21 @@ class ProduitController extends Controller
             $em->persist($produit);
             $em->flush();
 
-            $notification = new Notifications();
-            $notification
-                ->setTitle('Nouveau Produit')
-                ->setDescription($produit->getNom())
-                ->setRoute('gestion_stock')
-                ->setParameters(array('id' => $produit->getId()))
-            ;
-            $em->persist($notification);
-            $em->flush();
-
-            $pusher=$this->get('mrad.pusher.notifications');
-            $pusher->trigger($notification) ;
-
             return $this->redirectToRoute("ajouter_produit") ;
         }
+        $notification=$this->getDoctrine()->getManager()->getRepository('GProduitBundle:Notification')->findAll() ;
+
         return $this->render("@GProduit/Produit/ajouter_produit.html.twig",array(
-            'form'=>$form->createView()
+            'form'=>$form->createView(),'notification' => $notification
         ));
     }
     public function afficherAction(Request $request,$user_id){
         $em = $this->getDoctrine()->getManager();
         $produits=$em->getRepository('GProduitBundle:Produit')->findbyUser($user_id);
+        $notification=$this->getDoctrine()->getManager()->getRepository('GProduitBundle:Notification')->findAll() ;
 
         return $this->render('@VBack/Template/gestion_stock.html.twig',array(
-            'produits'=>$produits
+            'produits'=>$produits,'notification' => $notification
         ));
     }
 

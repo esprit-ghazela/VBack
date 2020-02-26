@@ -45,7 +45,7 @@ class ProduitType extends AbstractType
             ->add('image', FileType::class, array('label' => 'Image(JPG)',
                 'data_class' => null
             ))
-            ->add('review_rating', RatingType::class, ['stars' => 5])
+
             ->add('Valider',SubmitType::class)
 
         ;

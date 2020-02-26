@@ -1,6 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block titre %} Gestion du stocks {% endblock %}
-
+ {% block notification %}
+     {% for notification in notification %}
+         <li>
+             <div class="media">
+                 <img class="d-flex align-self-center img-radius" src="{{ asset('assets/images/avatar-3.jpg') }}" alt="Generic placeholder image">
+                 <div class="media-body">
+                     <h5 class="notification-user">{{ notification.title }}</h5>
+                     <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                     <span class="notification-time">30 minutes ago</span>
+                 </div>
+             </div>
+         </li>
+     {% endfor %}
+ {% endblock %}
 {% block body %}
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
@@ -18,6 +31,12 @@
                                          <button  class="btn btn-success" ><a href="{{ path("ajouter_produit")}}" ><i class="icofont icofont-plus"></i>Ajouter</a></button>
 
                                                                              </span>
+
+                                    <hr>
+                                    <span>
+               <input class="form-control" id="myInput" type="text" placeholder="Rechercher..">
+
+                                    </span>
 
                                 </h5>
                                 <ul class="breadcrumb-title b-t-default p-t-10">
@@ -63,7 +82,7 @@
                                             <th></th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="myTable">
                                         {% for produits in produits %}
                                         <tr>
 

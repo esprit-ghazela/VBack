@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PanierController extends Controller
 {
+
     public function afficherAction(Request $request){
         $data = new SearchData();
 

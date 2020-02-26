@@ -3,6 +3,9 @@
 namespace GProduitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Mgilet\NotificationBundle\NotifiableInterface;
+use SBC\NotificationsBundle\Builder\NotificationBuilder;
+
 use Symfony\Component\Validator\Constraints as Assert ;
 
 /**

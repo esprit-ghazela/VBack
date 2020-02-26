@@ -106,27 +106,8 @@
                                     <h6>Notifications</h6>
                                     <label class="label label-danger">Nouveauté</label>
                                 </li>
-                               <li>
-                                {# Call NotificationsBundles's assets #}
-                                {{ notifications_assets() }}
-                                <script>
-                                    /**
-                                     * After calling notifications_assets() "pusher" is now available
-                                     * and you can use it this way
-                                     */
-
-                                        // select the channel you want to listen to
-                                    var channel = pusher.subscribe("notifications");// notifications channel
-                                    channel.bind("my-event", function(data) {
-                                        console.log('from notifications channel', data);
-                                    });
-
-                                    var channel = pusher.subscribe("messages");// messages channel
-                                    channel.bind("my-event", function(data) {
-                                        console.log('from messages channel', data);
-                                    });
-                                </script>
-                               </li>
+                              {% block notification %}
+                                {% endblock %}
                             </ul>
                         </li>
 
@@ -380,6 +361,25 @@
     <![endif]-->
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
+    {# Call NotificationsBundles's assets #}
+    {{ notifications_assets() }}
+    <script>
+        /**
+         * After calling notifications_assets() "pusher" is now available
+         * and you can use it this way
+         */
+
+            // select the channel you want to listen to
+        var channel = pusher.subscribe("notifications");// notifications channel
+        channel.bind("my-event", function(data) {
+            console.log('from notifications channel', data);
+        });
+
+        var channel = pusher.subscribe("messages");// messages channel
+        channel.bind("my-event", function(data) {
+            console.log('from messages channel', data);
+        });
+    </script>
     <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/jquery-ui/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/popper.js/popper.min.js') }}"></script>
@@ -402,6 +402,19 @@
     <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
     <script src="{{ asset('assets/js/vartical-demo.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
     {% endblock %}
 </body>
 

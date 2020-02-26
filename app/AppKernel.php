@@ -28,7 +28,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
           ///  new Nomaya\SocialBundle\NomayaSocialBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
-            new blackknight467\StarRatingBundle\StarRatingBundle(),
+          ///  new blackknight467\StarRatingBundle\StarRatingBundle(),
          //  new Mgilet\NotificationBundle\MgiletNotificationBundle(),
             new SBC\NotificationsBundle\NotificationsBundle(),
         ];

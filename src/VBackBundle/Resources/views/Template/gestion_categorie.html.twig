@@ -2,6 +2,7 @@
 {% block titre %} Gestion des catégorie {% endblock %}
 
 {% block body %}
+
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">
@@ -14,12 +15,16 @@
                                 <h5 class="m-b-10">Gestion des categorie
                                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
                                     <span>
                                          <button  class="btn btn-success" ><a href="{{ path("ajouter_categorie")}}" ><i class="icofont icofont-plus"></i>Ajouter</a></button>
 
                                                                              </span>
+<hr>
+                                    <span>
+               <input class="form-control" id="myInput" type="text" placeholder="Rechercher..">
 
-
+                                    </span>
                                 </h5>
                                 <ul class="breadcrumb-title b-t-default p-t-10">
                                     <li class="breadcrumb-item">
@@ -62,7 +67,7 @@
                                             <th></th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="myTable">
                                         {% for categorie in categories %}
                                         <tr>
                                             <td>{{ categorie.id }}</td>
@@ -98,4 +103,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

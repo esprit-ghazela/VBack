@@ -1,6 +1,8 @@
 <?php
 
 namespace GProduitBundle\Entity;
+use Mgilet\NotificationBundle\NotifiableInterface;
+use SBC\NotificationsBundle\Builder\NotificationBuilder;
 use Symfony\Component\Validator\Constraints as Assert ;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="produit")
  * @ORM\Entity(repositoryClass="GProduitBundle\Repository\ProduitRepository")
  */
-class Produit
+class Produit implements NotifiableInterface
 {
     /**
      * @var int
@@ -245,6 +247,41 @@ class Produit
     public function setReference($reference)
     {
         $this->reference = $reference;
+    }
+
+    public function notificationsOnCreate(NotificationBuilder $builder)
+    {
+        $notification = new Notification();
+        $notification
+            ->setTitle('Nouveau Produit ajouter')
+            ->setDescription($this->getNom())
+            ->setRoute('detail_produit')
+            ->setParameters(array('id' => $this->id))
+        ;
+        $builder->addNotification($notification);
+
+        return $builder;
+    }
+
+    public function notificationsOnUpdate(NotificationBuilder $builder)
+    {
+        $notification = new Notification();
+        $notification
+            ->setTitle('Modification de produit')
+            ->setDescription($this->getNom())
+            ->setRoute('detail_produit')
+            ->setParameters(array('id' => $this->id))
+        ;
+        $builder->addNotification($notification);
+
+        return $builder;
+    }
+
+    public function notificationsOnDelete(NotificationBuilder $builder)
+    {
+        // in case you don't want any notification for a special event
+        // you can simply return an empty $builder
+        return $builder;
     }
 
 
